@@ -19,7 +19,13 @@ class MessageController extends Controller
      */
     public function index()
     {
-        return Inertia::render('messagerie/liste');
+        $allMessage = Message::with('user')
+                            ->where('user_id', Auth::user()->id)
+                            ->orderBy('created_at', 'desc')
+                            ->paginate();
+        return Inertia::render('messagerie/liste', [
+            'messages' => $allMessage
+        ]);
     }
 
     /**
