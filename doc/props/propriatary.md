@@ -1,0 +1,1 @@
+# env licence key props relatives to password computer
