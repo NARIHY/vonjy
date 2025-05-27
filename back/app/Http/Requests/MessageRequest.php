@@ -24,7 +24,7 @@ class MessageRequest extends FormRequest
         return [
             'subject' => 'required|string|max:255',
             'content' => 'required|string',
-            'user_id' => 'required|exists:users,id',
+            'user_id' => 'exists:users,id',
         ];
     }
 }

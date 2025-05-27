@@ -6,6 +6,7 @@ use App\Events\NewMessageEvent;
 use App\Http\Requests\MessageRequest;
 use App\Models\Message;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -32,19 +33,20 @@ class MessageController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request):JsonResponse
+    public function store(MessageRequest $request): RedirectResponse
     {
-            $validated = $request->validated();
+        $validated = $request->validated();
 
         $message = Message::create([
-            'user_id' => Auth::user()->workos_id,
+            'user_id' => Auth::user()->id,
             'subject' => $validated['subject'],
             'content' => $validated['content'],
         ]);
 
         broadcast(new NewMessageEvent($message))->toOthers();
 
-        return response()->json(['message' => $message]);
+        return redirect()->route('messagerie.show', $message->id)
+            ->with('success', 'Message sent successfully!');
     }
 
     /**

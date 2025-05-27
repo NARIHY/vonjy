@@ -1,10 +1,15 @@
 import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
-import { breadcrumbs } from '@/entity/breadcrumbs';
 import AppLayout from '@/layouts/app-layout';
+import { BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
 
 
-
+const breadcrumbs: BreadcrumbItem[] = [
+    {
+        title: 'Dashboard',
+        href: '/dashboard',
+    },
+];
 export default function Dashboard() {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>

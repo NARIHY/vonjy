@@ -20,7 +20,7 @@ const mainNavItems: NavItem[] = [
         title: 'Dashboard',
         href: '/dashboard',
         icon: LayoutGrid,
-    },
+    }
 ];
 
 const rightNavItems: NavItem[] = [
@@ -31,7 +31,7 @@ const rightNavItems: NavItem[] = [
     },
     {
         title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#react',
+        href: 'https://github.com/NARIHY/vonjy',
         icon: BookOpen,
     },
 ];
