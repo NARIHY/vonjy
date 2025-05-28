@@ -6,10 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
+
     protected $fillable = [
         'user_id',
         'content',
-        'subject'
+        'subject',
+        'status',
+        'read_at',
+        'priority'
     ];
     public function user()
     {

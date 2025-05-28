@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\StatusEnum as EnumStatusEnum;
+use App\Enums\StatusEnum;
 use App\Events\NewMessageEvent;
 use App\Http\Requests\MessageRequest;
 use App\Models\Message;
@@ -21,10 +23,17 @@ class MessageController extends Controller
     {
         $allMessage = Message::with('user')
                             ->where('user_id', Auth::user()->id)
+                            ->where('status',  \App\Enum\StatusEnum::UNREAD->value)
                             ->orderBy('created_at', 'desc')
-                            ->paginate();
+                            ->paginate(10);
+        $count = Message::with('user')
+                            ->where('user_id', Auth::user()->id)
+                            ->where('status',  \App\Enum\StatusEnum::UNREAD->value)
+                            ->orderBy('created_at', 'desc')
+                            ->count();
         return Inertia::render('messagerie/liste', [
-            'messages' => $allMessage
+            'messages' => $allMessage,
+            'count' => $count
         ]);
     }
 
@@ -42,11 +51,20 @@ class MessageController extends Controller
     public function store(MessageRequest $request): RedirectResponse
     {
         $validated = $request->validated();
+        // Validate priority against the enum
+        $priority = $validated['priority'] ?? 'normal';
+        if (!in_array($priority, array_column(\App\Enum\PriorityEnum::cases(), 'value'))) {
+            return redirect()->back()
+            ->withErrors(['priority' => 'La priorité sélectionnée est invalide.'])
+            ->withInput();
+        }
 
         $message = Message::create([
             'user_id' => Auth::user()->id,
             'subject' => $validated['subject'],
             'content' => $validated['content'],
+            'status' => EnumStatusEnum::UNREAD->value,
+            'priority' => $priority,
         ]);
 
         broadcast(new NewMessageEvent($message))->toOthers();
@@ -60,8 +78,14 @@ class MessageController extends Controller
      */
     public function show(Message $message)
     {
+        $messageWithUser = Message::with('user')->findOrFail($message->id);
+
+        $messageWithUser->update([
+            'status' => EnumStatusEnum::READ->value,
+            'read_at' => now(),
+        ]);
         return Inertia::render('messagerie/showMessage', [
-            'message' => $message
+            'message' =>   $messageWithUser
         ]);
     }
 

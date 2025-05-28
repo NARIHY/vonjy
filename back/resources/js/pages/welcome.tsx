@@ -1,3 +1,4 @@
+import AppearanceToggleDropdown from '@/components/appearance-dropdown';
 import { type SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 
@@ -215,6 +216,7 @@ export default function Welcome() {
                     <p className="mt-2">Développé avec ❤️ pour la solidarité malgache</p>
                 </footer>
             </div>
+            <AppearanceToggleDropdown />
         </>
     );
 }
