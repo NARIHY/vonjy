@@ -1,3 +1,5 @@
+import { User } from "@/types";
+
 export interface Column<T> {
   label: string;
   key?: keyof T; // clé du champ à afficher
@@ -20,4 +22,15 @@ export interface DataTableProps<T extends object> {
   columns: Column<T>[];
   data: T[];
   pagination?: PaginationData<T>;
+}
+
+export interface MessageProps {
+    message: {
+        id: number;
+        subject: string;
+        content: string;
+        user: User;
+        created_at?: string;
+    };
+    onClose: () => void;
 }
