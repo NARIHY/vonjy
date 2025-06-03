@@ -7,13 +7,6 @@ import { Column } from '@/interface/utils';
 import { Button } from '@/components/ui/button';
 import { PriorityEnum } from '@/enum/priorityEnum';
 
-
-/*
-
-        'status',
-        'read_at',
-        'priority'
-*/
 interface Message {
   id: number;
   content: string;
@@ -28,12 +21,13 @@ interface Message {
 interface PageProps {
   messages: {
     data: Message[];
-    count: number;
+    count: string;
     links: {
       url: string | null;
       label: string;
       active: boolean;
     }[];
+    total: string;
   };
   [key: string]: unknown;
 }
@@ -88,8 +82,8 @@ const Liste: React.FC = () => {
     </div>
       <div className='container mx-auto mt-4'>
         <div className="flex justify-center mb-4">
-            <p className="text-lg font-semibold text-gray-700 bg-gray-100 px-4 py-2 rounded shadow">
-                Nombre de résultats : {messages?.count ?? 0}
+            <p className="text-lg font-semibold text-gray-700  px-4 py-2 rounded shadow">
+                Nombre de résultats : {messages?.total ?? 0}
             </p>
         </div>
         <DataTable<Message>
