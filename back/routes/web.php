@@ -8,20 +8,23 @@ Route::get('/', function () {
     return Inertia::render('welcome');
 })->name('home');
 
-Route::middleware([
+Route::prefix('administration/')->middleware([
     'auth',
     ValidateSessionWithWorkOS::class,
 ])->group(function () {
-    Route::get('dashboard', function () {
+    Route::get('tableau-de-bord', function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
 
     Route::prefix('messagerie')->name('messagerie.')->group(function () {
-        Route::get('/', [\App\Http\Controllers\MessageController::class, 'index'])->name('index');
-        Route::get('/create', [\App\Http\Controllers\MessageController::class, 'create'])->name('create');
-        Route::post('/', [\App\Http\Controllers\MessageController::class, 'store'])->name('store');
-        Route::get('/{message}', [\App\Http\Controllers\MessageController::class, 'show'])->name('show');
+        Route::get('/', [\App\Http\Controllers\MessageControlleur::class, 'index'])->name('index');
+        Route::get('/create', [\App\Http\Controllers\MessageControlleur::class, 'create'])->name('create');
+        Route::post('/', [\App\Http\Controllers\MessageControlleur::class, 'store'])->name('store');
+        Route::get('/{message}', [\App\Http\Controllers\MessageControlleur::class, 'show'])->name('show');
     });
+
+    Route::resource('secours', \App\Http\Controllers\Secours\SecoursControlleur::class);
+
 });
 
 require __DIR__.'/settings.php';

@@ -14,7 +14,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
-class MessageController extends Controller
+class MessageControlleur extends Controller
 {
     /**
      * Display a listing of the resource.

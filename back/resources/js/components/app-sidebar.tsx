@@ -10,13 +10,18 @@ import AppLogo from './app-logo';
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
-        href: '/dashboard',
+        href: '/administration/tableau-de-bord',
         icon: LayoutGrid,
     },
     {
         title: 'Messagerie',
-        href: '/messagerie',
+        href: '/administration/messagerie',
         icon: MessageCircleCode,
+    },
+    {
+        title: 'Postes de Secours',
+        href: '/administration/secours',
+        icon: Folder,
     }
 ];
 

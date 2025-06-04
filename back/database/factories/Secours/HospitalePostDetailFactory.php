@@ -1,12 +1,12 @@
 <?php
 
-namespace Database\Factories\secorus;
+namespace Database\Factories\Secours;
 
-use App\Models\secours\SecoursPost;
+use App\Models\Secours\SecoursPost;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\secours\MilitaryPostDetail>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Secours\MilitaryPostDetail>
  */
 class HospitalePostDetailFactory extends Factory
 {
