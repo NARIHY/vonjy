@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Journale\ActualiteControlleur;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\WorkOS\Http\Middleware\ValidateSessionWithWorkOS;
@@ -25,6 +26,16 @@ Route::prefix('administration/')->middleware([
 
     Route::resource('secours', \App\Http\Controllers\Secours\SecoursControlleur::class);
 
+    Route::resource('actualites', ActualiteControlleur::class)
+         ->names([
+             'index'   => 'actualites.index',
+             'create'  => 'actualites.create',
+             'store'   => 'actualites.store',
+             'show'    => 'actualites.show',
+             'edit'    => 'actualites.edit',
+             'update'  => 'actualites.update',
+             'destroy' => 'actualites.destroy',
+         ]);
 });
 
 require __DIR__.'/settings.php';

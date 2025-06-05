@@ -75,7 +75,7 @@ const Liste: React.FC = () => {
     <div className="flex items-center justify-between mb-4">
       <h1 className="text-2xl font-bold">Liste des messages</h1>
       <Button variant="default" size="sm">
-      <Link href="/messagerie/create" className="bg-primary text-primary-foreground shadow-xs hover:bg-primary/90">
+      <Link href="/administration/messagerie/create" className="bg-primary text-primary-foreground shadow-xs hover:bg-primary/90">
         Créer un nouveau message
       </Link>
         </Button>
